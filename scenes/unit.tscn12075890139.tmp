@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://o5dngn1pftts"]
+
+[ext_resource type="Script" uid="uid://b48m7oeg0isdr" path="res://scripts/path_draw.gd" id="1_1jvru"]
+[ext_resource type="Script" uid="uid://bcyij1o8g6xad" path="res://scripts/unit.gd" id="1_k673f"]
+[ext_resource type="Texture2D" uid="uid://bcgk1uwns0p52" path="res://assets/armies/player_army.png" id="1_o7ajc"]
+[ext_resource type="Script" uid="uid://bpw556x0ne5wr" path="res://scripts/character.gd" id="3_gic7v"]
+[ext_resource type="Texture2D" uid="uid://bubtan4sxh2ep" path="res://assets/armies/outline.png" id="5_tb304"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k673f"]
+size = Vector2(12, 12)
+
+[node name="Unit" type="Node2D"]
+script = ExtResource("1_k673f")
+
+[node name="PathDraw" type="Node2D" parent="."]
+script = ExtResource("1_1jvru")
+
+[node name="Line2D" type="Line2D" parent="PathDraw"]
+width = 5.0
+
+[node name="Character" type="CharacterBody2D" parent="."]
+input_pickable = true
+script = ExtResource("3_gic7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+shape = SubResource("RectangleShape2D_k673f")
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+texture = ExtResource("1_o7ajc")
+
+[node name="Outline" type="Sprite2D" parent="Character"]
+visible = false
+texture = ExtResource("5_tb304")
+
+[connection signal="mouse_entered" from="Character" to="." method="_on_character_mouse_entered"]
+[connection signal="mouse_exited" from="Character" to="." method="_on_character_mouse_exited"]
