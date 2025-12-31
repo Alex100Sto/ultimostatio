@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://o5dngn1pftts"]
 
 [ext_resource type="Script" uid="uid://b48m7oeg0isdr" path="res://scripts/path_draw.gd" id="1_1jvru"]
-[ext_resource type="Script" uid="uid://bcyij1o8g6xad" path="res://scripts/unit.gd" id="1_k673f"]
+[ext_resource type="Script" uid="uid://bcyij1o8g6xad" path="res://scripts/battalion.gd" id="1_k673f"]
 [ext_resource type="Texture2D" uid="uid://bcgk1uwns0p52" path="res://assets/armies/player_army.png" id="1_o7ajc"]
 [ext_resource type="Script" uid="uid://bpw556x0ne5wr" path="res://scripts/character.gd" id="3_gic7v"]
 [ext_resource type="Texture2D" uid="uid://bubtan4sxh2ep" path="res://assets/armies/outline.png" id="5_tb304"]
@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k673f"]
 size = Vector2(16, 16)
 
-[node name="Unit" type="Node2D"]
+[node name="Battalion" type="Node2D"]
 script = ExtResource("1_k673f")
 
 [node name="PathDraw" type="Node2D" parent="."]
@@ -31,5 +31,6 @@ texture = ExtResource("1_o7ajc")
 visible = false
 texture = ExtResource("5_tb304")
 
+[connection signal="path_finished" from="PathDraw" to="." method="_on_path_finished"]
 [connection signal="mouse_entered" from="Character" to="." method="_on_character_mouse_entered"]
 [connection signal="mouse_exited" from="Character" to="." method="_on_character_mouse_exited"]

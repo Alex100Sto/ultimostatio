@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmbsx7b8r0jxr"]
+
+[ext_resource type="Script" uid="uid://caipdydo36mu5" path="res://scripts/company.gd" id="1_e4nfj"]
+[ext_resource type="Texture2D" uid="uid://cxjp2uolfeidf" path="res://assets/armies/ally_company.png" id="1_kf4us"]
+[ext_resource type="Script" uid="uid://c7531iqcuvh4n" path="res://scripts/formation.gd" id="2_dhsw8"]
+[ext_resource type="Texture2D" uid="uid://bubtan4sxh2ep" path="res://assets/armies/outline.png" id="4_genf0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4nfj"]
+size = Vector2(16, 16)
+
+[node name="Company" type="Node2D"]
+script = ExtResource("1_e4nfj")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+width = 5.0
+
+[node name="Formation" type="Area2D" parent="."]
+script = ExtResource("2_dhsw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Formation"]
+shape = SubResource("RectangleShape2D_e4nfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Formation"]
+texture = ExtResource("1_kf4us")
+
+[node name="Outline" type="Sprite2D" parent="Formation"]
+visible = false
+texture = ExtResource("4_genf0")
+
+[connection signal="mouse_entered" from="Formation" to="." method="_on_formation_mouse_entered"]
+[connection signal="mouse_exited" from="Formation" to="." method="_on_formation_mouse_exited"]
+[connection signal="moved" from="Formation" to="." method="_on_formation_moved"]

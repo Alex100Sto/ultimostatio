@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=4 uid="uid://c1tlp5bb511s2"]
+
+[ext_resource type="Texture2D" uid="uid://d37blihrj204h" path="res://assets/tiles/background.png" id="1_idkgt"]
+[ext_resource type="PackedScene" uid="uid://bmbsx7b8r0jxr" path="res://scenes/company.tscn" id="2_kinr6"]
+[ext_resource type="Texture2D" uid="uid://dvfrhtn7dqoli" path="res://assets/tiles/tilemap.2.png" id="2_rca61"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8qdv8"]
+texture = ExtResource("2_rca61")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pxwbd"]
+sources/0 = SubResource("TileSetAtlasSource_8qdv8")
+
+[node name="Battle_Scene" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 184.0
+offset_bottom = 184.0
+texture = ExtResource("1_idkgt")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray("AAADAAQAAAAAAAEAAAADAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAKAAsAAAACAAAAAAALAAsAAAACAAAAAAALAAoAAAACAAAAAAALAAkAAAACAAAAAAAKAAkAAAACAAAAAAAKAAgAAAACAAAAAAALAAgAAAACAAAAAAALAAcAAAACAAAAAAALAAYAAAACAAAAAAAEAAgAAAABAAAAAAAFAAgAAAABAAAAAAAFAAcAAAABAAAAAAAFAAYAAAABAAAAAAAGAAgAAAABAAAAAAAGAAcAAAABAAAAAAAIAAYAAAABAAAAAAAJAAYAAAABAAAAAAAJAAUAAAABAAAAAAAIAAUAAAABAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAGAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAADAAoAAAAAAAAAAAADAAkAAAAAAAAAAAADAAgAAAAAAAAAAAADAAcAAAAAAAAAAAADAAYAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAIAAgAAAAAAAAAAAAIAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_pxwbd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(112, 112)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Company" parent="Node2D" instance=ExtResource("2_kinr6")]
+position = Vector2(64, 160)
+
+[node name="Company2" parent="Node2D" instance=ExtResource("2_kinr6")]
+position = Vector2(128, 160)
+
+[node name="Company3" parent="Node2D" instance=ExtResource("2_kinr6")]
+position = Vector2(96, 144)
+
+[node name="SelectorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
