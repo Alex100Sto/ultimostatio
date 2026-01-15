@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CompanyData" load_steps=2 format=3 uid="uid://b5eikycweqi6c"]
+
+[ext_resource type="Script" uid="uid://d0n7x7ve3mqea" path="res://scripts/company_data.gd" id="1_kr6k7"]
+
+[resource]
+script = ExtResource("1_kr6k7")
+company_name = "Sword"
+center_hp_max = 56.0
+l_flank_hp_max = 28.0
+r_flank_hp_max = 28.0
+attack_damage = 5.0
+attack_range = 1
+move_speed = 1
+money_cost = 450
+ppl_cost = 112
+metadata/_custom_type_script = "uid://d0n7x7ve3mqea"

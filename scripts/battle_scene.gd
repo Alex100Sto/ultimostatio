@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var map: TileMapLayer = $TileMapLayer
 @onready var bg: TextureRect = $Background
+@onready var f_bat: Node2D = $Friendly_Battalion
+@onready var e_bat: Node2D = $Enemy_Battalion
 var astar_grid: AStarGrid2D
 var grid_size = 16
 
@@ -10,7 +12,7 @@ func _ready() -> void:
 	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_EUCLIDEAN
 	astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_EUCLIDEAN
 	astar_grid.cell_size = map.tile_set.tile_size
-	astar_grid.region = Rect2((bg.position.x + grid_size) / grid_size, (bg.position.y + grid_size) / grid_size, bg.size.x / grid_size, bg.size.y / grid_size)
+	astar_grid.region = map.get_used_rect()
 	astar_grid.update()
 	
 	for id in map.get_used_cells():
@@ -24,6 +26,8 @@ func _ready() -> void:
 		else:
 			astar_grid.set_point_weight_scale(id, 1)
 	
-	$Battalion/Company.set_map(astar_grid)
-	$Battalion/Company2.set_map(astar_grid)
-	$Battalion/Company3.set_map(astar_grid)
+	for i in f_bat.get_children():
+		i.set_map(astar_grid)
+	
+	for i in e_bat.get_children():
+		i.set_map(astar_grid)

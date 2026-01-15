@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmbsx7b8r0jxr"]
+[gd_scene load_steps=8 format=3 uid="uid://bmbsx7b8r0jxr"]
 
 [ext_resource type="Script" uid="uid://caipdydo36mu5" path="res://scripts/company.gd" id="1_e4nfj"]
 [ext_resource type="Texture2D" uid="uid://cxjp2uolfeidf" path="res://assets/armies/ally_company.png" id="1_kf4us"]
 [ext_resource type="Script" uid="uid://c7531iqcuvh4n" path="res://scripts/formation.gd" id="2_dhsw8"]
 [ext_resource type="Texture2D" uid="uid://bubtan4sxh2ep" path="res://assets/armies/outline.png" id="4_genf0"]
+[ext_resource type="Texture2D" uid="uid://wkqrfhd116aq" path="res://assets/healthbar/empty_bar.png" id="5_3gnax"]
+[ext_resource type="Texture2D" uid="uid://mop3ayteltgq" path="res://assets/healthbar/full_bar.png" id="6_7f0bb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4nfj"]
 size = Vector2(16, 16)
@@ -12,7 +14,6 @@ size = Vector2(16, 16)
 script = ExtResource("1_e4nfj")
 
 [node name="Line2D" type="Line2D" parent="."]
-top_level = true
 width = 5.0
 
 [node name="Formation" type="Area2D" parent="."]
@@ -27,6 +28,16 @@ texture = ExtResource("1_kf4us")
 [node name="Outline" type="Sprite2D" parent="Formation"]
 visible = false
 texture = ExtResource("4_genf0")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Formation"]
+offset_left = -7.0
+offset_top = -7.0
+offset_right = -6.0
+offset_bottom = 3.0
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("5_3gnax")
+texture_progress = ExtResource("6_7f0bb")
 
 [connection signal="mouse_entered" from="Formation" to="." method="_on_formation_mouse_entered"]
 [connection signal="mouse_exited" from="Formation" to="." method="_on_formation_mouse_exited"]

@@ -1,17 +1,19 @@
 extends Area2D
 
 @onready var line: Line2D = $"../Line2D"
-@export var move_time: float = 0.5
+@export var move_time: float = 1
 
 signal moved(moving: bool)
 
 var path: Array[Vector2] = []
+var new_weights: Array[float] = []
 var is_moving: bool = false
 
-func set_path(new_path: Array[Vector2]) -> void:
+func set_path(new_path: Array[Vector2], weights: Array[float]) -> void:
 	if is_moving:
 		return
 	path = new_path.duplicate()
+	new_weights = weights.duplicate()
 	if path.size() > 0:
 		path.pop_front()
 		_start_moving()
@@ -29,12 +31,12 @@ func move_along_path() -> void:
 	var next_tile = path.pop_front()
 	var start_pos := global_position
 	var t := 0.0
-	var duration := move_time
+	var duration: float = move_time * new_weights.pop_front()
 	while t < 1.0:
 		if t >= 0.5 - (0.5*(get_physics_process_delta_time() / duration)) and t <= 0.5 + (0.5*(get_physics_process_delta_time() / duration)):
 			line.remove_point(0)
 		t += get_physics_process_delta_time() / duration
-		self.get_parent().global_position = start_pos.lerp(next_tile, t)
+		global_position = start_pos.lerp(next_tile, t)
 		await get_tree().process_frame
-	self.get_parent().global_position = next_tile
+	global_position = next_tile
 	move_along_path()
