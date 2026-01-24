@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var line: Line2D = $"../Line2D"
+@onready var line: Line2D = $"../Node/Line2D"
 @export var move_time: float = 1
 
 signal moved(moving: bool)
@@ -36,7 +36,7 @@ func move_along_path() -> void:
 		if t >= 0.5 - (0.5*(get_physics_process_delta_time() / duration)) and t <= 0.5 + (0.5*(get_physics_process_delta_time() / duration)):
 			line.remove_point(0)
 		t += get_physics_process_delta_time() / duration
-		global_position = start_pos.lerp(next_tile, t)
+		self.get_parent().global_position = start_pos.lerp(next_tile, t)
 		await get_tree().process_frame
-	global_position = next_tile
+	self.get_parent().global_position = next_tile
 	move_along_path()

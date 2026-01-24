@@ -13,10 +13,13 @@ size = Vector2(16, 16)
 [node name="Company" type="Node2D"]
 script = ExtResource("1_e4nfj")
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Node" type="Node" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Node"]
 width = 5.0
 
 [node name="Formation" type="Area2D" parent="."]
+z_index = 1
 script = ExtResource("2_dhsw8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Formation"]

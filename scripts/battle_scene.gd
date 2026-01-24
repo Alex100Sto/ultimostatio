@@ -27,7 +27,7 @@ func _ready() -> void:
 			astar_grid.set_point_weight_scale(id, 1)
 	
 	for i in f_bat.get_children():
-		i.set_map(astar_grid)
+		i.set_envirement(astar_grid, map, f_bat, e_bat)
 	
 	for i in e_bat.get_children():
-		i.set_map(astar_grid)
+		i.set_envirement(astar_grid, map, e_bat, f_bat)

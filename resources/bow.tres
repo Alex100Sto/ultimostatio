@@ -5,9 +5,12 @@
 [resource]
 script = ExtResource("1_ugy4v")
 company_name = "Bow"
-center_hp_max = 100.0
+center_hp_max = 50.0
+l_flank_hp_max = 25.0
+r_flank_hp_max = 25.0
 attack_damage = 10.0
-attack_range = 2
+attack_cooldown = 1.0
+attack_range = 1.0
 move_speed = 1
 money_cost = 500
 ppl_cost = 100

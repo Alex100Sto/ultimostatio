@@ -9,7 +9,8 @@ class_name CompanyData
 @export var r_flank_hp_max: float
 
 @export var attack_damage: float
-@export var attack_range: int
+@export var attack_cooldown: float
+@export var attack_range: float
 
 @export var move_speed: int
 
