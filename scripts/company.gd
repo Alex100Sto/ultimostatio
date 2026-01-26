@@ -11,6 +11,7 @@ var attack_rng: float
 var attack_cdw: float
 
 var cooldown: float = 0.0
+var m_cooldown: float = 0.0
 
 var occupied_space: Vector2
 
@@ -32,9 +33,15 @@ var sprite_check: bool = false
 
 func _ready() -> void:
 	if !faction_id:
-		sprite.texture = load("res://assets/armies/ally_company.png")
+		if data == load("res://resources/bow.tres"):
+			sprite.texture = load("res://assets/armies/ally_company_bow.png")
+		elif data == load("res://resources/sword.tres"):
+			sprite.texture = load("res://assets/armies/ally_company.png")
 	else:
-		sprite.texture = load("res://assets/armies/enemy_company.png")
+		if data == load("res://resources/bow.tres"):
+			sprite.texture = load("res://assets/armies/enemy_company_bow.png")
+		elif data == load("res://resources/sword.tres"):
+			sprite.texture = load("res://assets/armies/enemy_company.png")
 	health = data.center_hp_max
 	attack_dmg = data.attack_damage
 	attack_rng = data.attack_range
@@ -60,9 +67,13 @@ func set_envirement(_map: AStarGrid2D, _tilemap: TileMapLayer, _ally: Node2D, _e
 
 func _physics_process(delta: float) -> void:
 	cooldown -= delta
+	m_cooldown -= delta
 	
 	if cooldown <= 0:
 		try_attack()
+	if m_cooldown <= 0 and enemies.get_child_count() > 0:
+		enemy_ai()
+		m_cooldown = 1.0
 
 func try_attack():
 	var curr_cell := tilemap.local_to_map(to_local(global_position))
@@ -83,7 +94,7 @@ func try_attack():
 			same_tile_combat_exit()
 			sprite_check = false
 		
-		if dist <= attack_rng and dist < closest_dist:
+		if dist <= attack_rng and dist <= closest_dist:
 			closest_dist = dist
 			closest_target = enemy
 	
@@ -127,6 +138,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			outline.visible = false
 			line.clear_points()
 	if outline.visible and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and moving == false:
+		if map.get_point_path(formation.global_position/grid, get_global_mouse_position().snapped(grid)/grid).size() <= 0:
+			return
 		for ally in allies.get_children():
 			if ally.occupied_space == get_global_mouse_position().snapped(grid):
 				return
@@ -136,3 +149,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			weights.append(map.get_point_weight_scale(point/grid))
 		formation.set_path(map.get_point_path(formation.global_position/grid, get_global_mouse_position().snapped(grid)/grid), weights)
 		moving = true
+
+func enemy_ai():
+	if faction_id <= 0:
+		return
+	var closest_target: Node2D = null
+	for enemy in enemies.get_children():
+		if !closest_target or (self.occupied_space - closest_target.occupied_space).length() > (self.occupied_space - enemy.occupied_space).length():
+			closest_target = enemy
+	occupied_space = closest_target.occupied_space
+	for ally in allies.get_children():
+		if ally != self and self.occupied_space == ally.occupied_space:
+			occupied_space = map.get_point_path(formation.global_position/grid, occupied_space.snapped(grid)/grid)[-2]
+	var weights: Array[float] = []
+	for point in map.get_point_path(formation.global_position/grid, occupied_space.snapped(grid)/grid):
+		weights.append(map.get_point_weight_scale(point/grid))
+	formation.set_path(map.get_point_path(formation.global_position/grid, occupied_space.snapped(grid)/grid), weights)

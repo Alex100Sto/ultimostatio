@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c1tlp5bb511s2"]
+[gd_scene load_steps=11 format=4 uid="uid://c1tlp5bb511s2"]
 
 [ext_resource type="Script" uid="uid://birohiebf8wpr" path="res://scripts/battle_scene.gd" id="1_8qdv8"]
 [ext_resource type="Texture2D" uid="uid://d37blihrj204h" path="res://assets/tiles/background.png" id="1_idkgt"]
@@ -8,7 +8,6 @@
 [ext_resource type="Resource" uid="uid://b5eikycweqi6c" path="res://resources/sword.tres" id="5_pxwbd"]
 [ext_resource type="Resource" uid="uid://sjib1oljevt2" path="res://resources/bow.tres" id="6_1i8jf"]
 [ext_resource type="Script" uid="uid://ckr8xrgt56hbu" path="res://scripts/enemy_battalion.gd" id="8_rum4d"]
-[ext_resource type="Script" uid="uid://bfyf3gxbp0wc1" path="res://scripts/pause_ui.gd" id="9_3oc74"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8qdv8"]
 texture = ExtResource("2_rca61")
@@ -33,10 +32,6 @@ custom_data_layer_2/type = 1
 custom_data_layer_3/name = "forest"
 custom_data_layer_3/type = 1
 sources/0 = SubResource("TileSetAtlasSource_8qdv8")
-
-[sub_resource type="LabelSettings" id="LabelSettings_rum4d"]
-line_spacing = 1.0
-font_size = 10
 
 [node name="Battle_Scene" type="Node2D"]
 script = ExtResource("1_8qdv8")
@@ -90,31 +85,3 @@ data = ExtResource("5_pxwbd")
 [node name="E_Company3" parent="Enemy_Battalion" instance=ExtResource("2_kinr6")]
 position = Vector2(64, 80)
 data = ExtResource("6_1i8jf")
-
-[node name="PauseUI" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("9_3oc74")
-
-[node name="ColorRect" type="ColorRect" parent="PauseUI"]
-offset_right = 272.0
-offset_bottom = 272.0
-color = Color(0, 0, 0, 0.25882354)
-
-[node name="Label" type="Label" parent="PauseUI"]
-offset_right = 272.0
-offset_bottom = 72.0
-text = "The game is paused"
-label_settings = SubResource("LabelSettings_rum4d")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Label2" type="Label" parent="PauseUI"]
-offset_top = 199.0
-offset_right = 272.0
-offset_bottom = 271.0
-text = "Press Space to unpause"
-label_settings = SubResource("LabelSettings_rum4d")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2

@@ -103,7 +103,7 @@ color = Color(0, 0, 0, 0.25882354)
 [node name="Label" type="Label" parent="PauseUI"]
 offset_right = 272.0
 offset_bottom = 72.0
-text = "The game is paused"
+text = "The game is paused, however you can still command your units where to go"
 label_settings = SubResource("LabelSettings_rum4d")
 horizontal_alignment = 1
 vertical_alignment = 1

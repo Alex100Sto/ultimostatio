@@ -33,6 +33,10 @@ func move_along_path() -> void:
 	var t := 0.0
 	var duration: float = move_time * new_weights.pop_front()
 	while t < 1.0:
+		while get_tree().paused:
+			await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		if (t + (get_physics_process_delta_time() / duration)) > 1.0:
+			break
 		if t >= 0.5 - (0.5*(get_physics_process_delta_time() / duration)) and t <= 0.5 + (0.5*(get_physics_process_delta_time() / duration)):
 			line.remove_point(0)
 		t += get_physics_process_delta_time() / duration
